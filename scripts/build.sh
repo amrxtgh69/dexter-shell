@@ -1,21 +1,28 @@
+#!/bin/bash
+set -euo pipefail
+
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color (reset)
 
-echo "building the dexter shell"
+# Resolve project root independent of where the script is invoked from.
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+BUILD_DIR="${PROJECT_ROOT}/build"
+DIST_DIR="${PROJECT_ROOT}/dist"
 
-rm -rf build
+echo "building the shell"
 
-mkdir -p build
-cd build
+rm -rf "${BUILD_DIR}"
+mkdir -p "${BUILD_DIR}"
 
 echo -e "${GREEN}***Generating build files***${NC}"
-cmake ..
+cmake -S "${PROJECT_ROOT}" -B "${BUILD_DIR}"
 echo ""
 
 echo -e "${GREEN}***Building the project***${NC}"
-cmake --build .
+cmake --build "${BUILD_DIR}"
 echo ""
 
 echo -e "${GREEN}***Installing the project***${NC}"
-cmake --install . --prefix ../dist
+cmake --install "${BUILD_DIR}" --prefix "${DIST_DIR}"
 echo ""

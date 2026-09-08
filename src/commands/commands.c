@@ -4,7 +4,7 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include "commands.h"
+#include "../../include/commands.h"
 
 void built_ls(char *path) {
   DIR *dir;

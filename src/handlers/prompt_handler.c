@@ -5,9 +5,9 @@
 void print_prompt() {
   char cwd[1024];
   if (getcwd(cwd, sizeof(cwd)) != NULL) {
-    printf("dexter:%s> ", cwd);
+    printf("shell:%s> ", cwd);
   } else {
-    printf("dexter> ");
+    printf("shell> ");
   }
   fflush(stdout);
 }

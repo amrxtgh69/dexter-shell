@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(dexter LANGUAGES C CXX)
+project(shell LANGUAGES C)
 
 set(CMAKE_C_STANDARD 11)
 
-include_directories(include)
+add_executable(shell src/main.c src/parsers/parser.c src/handlers/prompt_handler.c src/handlers/command_handler.c src/commands/commands.c)
 
-add_executable(dexter src/main.c src/parsers/parser.c src/handlers/prompt_handler.c src/handlers/command_handler.c src/commands/commands.c)
+target_include_directories(shell PRIVATE include)
 
-install(TARGETS dexter RUNTIME DESTINATION bin)
+install(TARGETS shell RUNTIME DESTINATION bin)
 
